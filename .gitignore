@@ -1,0 +1,174 @@
+# ============================================================
+# SECRETS & CREDENTIALS — never commit these
+# ============================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cert
+*.der
+credentials.json
+secrets.json
+service-account*.json
+*-service-account.json
+gcloud_credentials.json
+firebase-adminsdk*.json
+google-services.json
+GoogleService-Info.plist
+keystore.jks
+*.keystore
+*.jks
+# AWS credentials
+.aws/
+aws_credentials
+# Kubernetes secrets
+*-secret.yaml
+*-secrets.yaml
+
+# ============================================================
+# Claude Code — never commit AI session data
+# ============================================================
+.claude/
+
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+*.egg
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+lib/
+lib64/
+.installed.cfg
+MANIFEST
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+coverage.json
+htmlcov/
+nosetests.xml
+*.log
+# Ruff
+.ruff_cache/
+# Celery
+celerybeat-schedule
+celerybeat.pid
+# pyenv
+.python-version
+
+# ============================================================
+# Node / React Native / Expo
+# ============================================================
+node_modules/
+.expo/
+.expo-shared/
+dist/
+web-build/
+.cache/
+*.tsbuildinfo
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+# Local Expo secrets
+eas-cli-local-credentials.json
+eas/local-credentials.json
+# Metro bundler cache
+.metro-health-check*
+# Gradle (Android)
+android/
+*.apk
+*.aab
+*.aar
+# Xcode (iOS)
+ios/
+*.xcworkspace
+*.xcuserdata
+DerivedData/
+*.ipa
+
+# ============================================================
+# Docker
+# ============================================================
+*.env.local
+*.env.production
+*.env.staging
+docker-compose.override.yml
+docker-compose.local.yml
+
+# ============================================================
+# OS artefacts
+# ============================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================================================
+# IDE / editor
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.project
+.classpath
+.settings/
+*.iml
+
+# ============================================================
+# Alembic compiled
+# ============================================================
+alembic/versions/__pycache__/
+
+# ============================================================
+# Misc uploads / temp files
+# ============================================================
+uploads/
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+*.rej

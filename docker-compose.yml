@@ -1,0 +1,82 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./packages/backend:/app
+      - ./packages/shared:/shared:ro
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://fieldwatch:fieldwatch@db:5432/fieldwatch
+      - REDIS_URL=redis://redis:6379/0
+      - JWT_SECRET=dev-secret-change-in-production-1234
+      - JWT_ACCESS_EXPIRE_MINUTES=15
+      - JWT_REFRESH_EXPIRE_DAYS=7
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_S3_BUCKET=fieldwatch-uploads
+      - AWS_REGION=eu-north-1
+      - NOMINATIM_USER_AGENT=fieldwatch-dev
+      - FIREBASE_CREDENTIALS_JSON={}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  worker:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./packages/backend:/app
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://fieldwatch:fieldwatch@db:5432/fieldwatch
+      - REDIS_URL=redis://redis:6379/0
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_S3_BUCKET=fieldwatch-uploads
+      - AWS_REGION=eu-north-1
+      - NOMINATIM_USER_AGENT=fieldwatch-dev
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: celery -A app.tasks.celery_app worker --loglevel=info
+
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: fieldwatch
+      POSTGRES_PASSWORD: fieldwatch
+      POSTGRES_DB: fieldwatch
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fieldwatch"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
