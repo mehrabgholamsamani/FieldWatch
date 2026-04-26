@@ -13,18 +13,14 @@ A production-grade field reporting system for inspectors, maintenance teams, and
 
 ---
 
-### 🗺️ Manager Map View
-![Map View](./screenshots/demo-map-view.png)
+### 👨🏻‍💼 Manager Dashboard
+![Manager Dashboard](./screenshots/demo-manager-dashboard.png)
+![Manager Dashboard](./screenshots/demo-manager-dashboard2.png)
 
 ---
 
 ### 📊 Report Feed & Filters
 ![Report Feed](./screenshots/demo-report-feed.png)
-
----
-
-### 🤖 AI-Assisted Triage
-![AI Triage](./screenshots/demo-ai-triage.png)
 
 ---
 
