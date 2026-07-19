@@ -69,7 +69,7 @@ FastAPI API  (EC2)
 
 ---
 
-## 🏆 Feature Ranking By Impressiveness
+## 🏆 Current Features
 
 ### 1. 🔄 Offline-First Report Sync With Idempotent Recovery
 
